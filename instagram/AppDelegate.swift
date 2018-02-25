@@ -20,10 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.initialize(
             with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "instagram"
-                configuration.clientKey = nil  // set to nil assuming you have not set clientKey
-                configuration.server = "https://instagram.herokuapp.com/parse"
+                configuration.clientKey = "instagram123456"  // set to nil assuming you have not set clientKey
+                configuration.server = "https://instagramjy.herokuapp.com/parse"
             })
         )
+        // check if user is logged in.
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // view controller currently being set in Storyboard as default will be overridden
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticatedViewController")
+        }
         return true
     }
 
